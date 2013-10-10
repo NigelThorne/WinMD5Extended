@@ -6,6 +6,7 @@ namespace WinMD52
     public class KnowledgeBase
     {
         private readonly Hashtable _hashtable = Hashtable.Synchronized(new Hashtable());
+        private readonly List<string> _found = new List<string>();
         private readonly object _myLock = new object();
 
         /** Return just the file name, removing any directory information. **/
@@ -23,6 +24,16 @@ namespace WinMD52
         }
 
         public int Count { get { return _hashtable.Count; } }
+
+        public int UnfoundCount { get
+        {
+            var keys = new ArrayList(_hashtable.Keys);
+            foreach (var key in _found)
+            {
+                keys.Remove(key);
+            }
+            return keys.Count;
+        }}
 
         public void AddRecord(string path, string hash)
         {
@@ -43,10 +54,12 @@ namespace WinMD52
         public void Clear()
         {
             _hashtable.Clear();
+            _found.Clear();
         }
 
         public bool? CheckFile(string partialpath, string hash)
         {
+            _found.Add(hash);
             if (!_hashtable.ContainsKey(hash)) return null;
             var paths = (List<string>)_hashtable[hash];
             if (paths.Contains(partialpath)) return true;

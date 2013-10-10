@@ -84,6 +84,8 @@ namespace WinMD5
         private MenuItem menuItem3;
         private MenuItem alwaysOnTopItem;
         private MenuItem useCRLF;
+        private Label unmatchedHashesLabel;
+        private Label label5;
 
 		protected ProgressStream progStream;
 
@@ -162,6 +164,7 @@ namespace WinMD5
 
 			listView.Items.Add(lvi);
 	//		listView.EnsureVisible(listView.Items.Count-1);
+            unmatchedHashesLabel.Text = "" + kb.UnfoundCount;
 
 			EnableAlert(hashErrors>0);
 		}
@@ -212,7 +215,8 @@ namespace WinMD5
 				lvi.SubItems[COLUMN_STATUS].Text=verified;
 			}
 
-			knownHashesLabel.Text=""+kb.Count;
+            knownHashesLabel.Text = "" + kb.Count;
+			unmatchedHashesLabel.Text= ""+kb.UnfoundCount;
 
 			EnableAlert(hashErrors>0);
 		}
@@ -456,6 +460,8 @@ namespace WinMD5
             this.alertLabel = new System.Windows.Forms.Label();
             this.enqueuedLabel = new System.Windows.Forms.Label();
             this.abortButton = new System.Windows.Forms.Button();
+            this.unmatchedHashesLabel = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox)).BeginInit();
             this.SuspendLayout();
             // 
@@ -463,16 +469,16 @@ namespace WinMD5
             // 
             this.progressBar.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.progressBar.Location = new System.Drawing.Point(10, 58);
+            this.progressBar.Location = new System.Drawing.Point(8, 50);
             this.progressBar.Name = "progressBar";
-            this.progressBar.Size = new System.Drawing.Size(659, 9);
+            this.progressBar.Size = new System.Drawing.Size(662, 8);
             this.progressBar.TabIndex = 1;
             // 
             // label1
             // 
-            this.label1.Location = new System.Drawing.Point(10, 14);
+            this.label1.Location = new System.Drawing.Point(8, 12);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(144, 23);
+            this.label1.Size = new System.Drawing.Size(120, 20);
             this.label1.TabIndex = 2;
             this.label1.Text = "Currently Processing:";
             // 
@@ -582,9 +588,9 @@ namespace WinMD5
             // webLink
             // 
             this.webLink.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.webLink.Location = new System.Drawing.Point(465, 268);
+            this.webLink.Location = new System.Drawing.Point(500, 299);
             this.webLink.Name = "webLink";
-            this.webLink.Size = new System.Drawing.Size(221, 26);
+            this.webLink.Size = new System.Drawing.Size(185, 23);
             this.webLink.TabIndex = 3;
             this.webLink.TabStop = true;
             this.webLink.Text = "http://www.blisstonia.com/software";
@@ -594,18 +600,18 @@ namespace WinMD5
             // 
             this.currentlyProcessingLabel.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.currentlyProcessingLabel.Location = new System.Drawing.Point(144, 14);
+            this.currentlyProcessingLabel.Location = new System.Drawing.Point(120, 12);
             this.currentlyProcessingLabel.Name = "currentlyProcessingLabel";
-            this.currentlyProcessingLabel.Size = new System.Drawing.Size(333, 23);
+            this.currentlyProcessingLabel.Size = new System.Drawing.Size(390, 20);
             this.currentlyProcessingLabel.TabIndex = 5;
             this.currentlyProcessingLabel.Text = "(idle)";
             // 
             // label3
             // 
             this.label3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.label3.Location = new System.Drawing.Point(10, 268);
+            this.label3.Location = new System.Drawing.Point(8, 299);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(364, 18);
+            this.label3.Size = new System.Drawing.Size(304, 16);
             this.label3.TabIndex = 6;
             this.label3.Text = "Drag files and MD5SUM files (if available) into this window.";
             // 
@@ -625,10 +631,10 @@ namespace WinMD5
             this.listView.FullRowSelect = true;
             this.listView.GridLines = true;
             this.listView.ImeMode = System.Windows.Forms.ImeMode.On;
-            this.listView.Location = new System.Drawing.Point(10, 74);
+            this.listView.Location = new System.Drawing.Point(8, 64);
             this.listView.Name = "listView";
             this.listView.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.listView.Size = new System.Drawing.Size(659, 148);
+            this.listView.Size = new System.Drawing.Size(662, 190);
             this.listView.TabIndex = 7;
             this.listView.UseCompatibleStateImageBehavior = false;
             this.listView.View = System.Windows.Forms.View.Details;
@@ -657,18 +663,18 @@ namespace WinMD5
             // label4
             // 
             this.label4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.label4.Location = new System.Drawing.Point(292, 240);
+            this.label4.Location = new System.Drawing.Point(356, 264);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(346, 19);
+            this.label4.Size = new System.Drawing.Size(289, 16);
             this.label4.TabIndex = 8;
             this.label4.Text = "Number of known md5 hashes found in MD5SUM files: ";
             // 
             // knownHashesLabel
             // 
             this.knownHashesLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.knownHashesLabel.Location = new System.Drawing.Point(628, 240);
+            this.knownHashesLabel.Location = new System.Drawing.Point(636, 264);
             this.knownHashesLabel.Name = "knownHashesLabel";
-            this.knownHashesLabel.Size = new System.Drawing.Size(38, 27);
+            this.knownHashesLabel.Size = new System.Drawing.Size(32, 23);
             this.knownHashesLabel.TabIndex = 9;
             this.knownHashesLabel.Text = "0";
             this.knownHashesLabel.TextAlign = System.Drawing.ContentAlignment.TopRight;
@@ -676,9 +682,9 @@ namespace WinMD5
             // clearButton
             // 
             this.clearButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.clearButton.Location = new System.Drawing.Point(10, 231);
+            this.clearButton.Location = new System.Drawing.Point(8, 262);
             this.clearButton.Name = "clearButton";
-            this.clearButton.Size = new System.Drawing.Size(90, 26);
+            this.clearButton.Size = new System.Drawing.Size(75, 23);
             this.clearButton.TabIndex = 10;
             this.clearButton.Text = "&Clear";
             this.clearButton.Click += new System.EventHandler(this.clearButton_Click);
@@ -692,9 +698,9 @@ namespace WinMD5
             this.pictureBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.pictureBox.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox.Image")));
             this.pictureBox.InitialImage = ((System.Drawing.Image)(resources.GetObject("pictureBox.InitialImage")));
-            this.pictureBox.Location = new System.Drawing.Point(617, 5);
+            this.pictureBox.Location = new System.Drawing.Point(627, 4);
             this.pictureBox.Name = "pictureBox";
-            this.pictureBox.Size = new System.Drawing.Size(42, 46);
+            this.pictureBox.Size = new System.Drawing.Size(35, 40);
             this.pictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBox.TabIndex = 11;
             this.pictureBox.TabStop = false;
@@ -710,9 +716,9 @@ namespace WinMD5
             // 
             this.alertLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.alertLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.alertLabel.Location = new System.Drawing.Point(434, 17);
+            this.alertLabel.Location = new System.Drawing.Point(475, 15);
             this.alertLabel.Name = "alertLabel";
-            this.alertLabel.Size = new System.Drawing.Size(176, 20);
+            this.alertLabel.Size = new System.Drawing.Size(146, 17);
             this.alertLabel.TabIndex = 12;
             this.alertLabel.Text = "Errors Found";
             this.alertLabel.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -721,28 +727,49 @@ namespace WinMD5
             // 
             // enqueuedLabel
             // 
-            this.enqueuedLabel.Location = new System.Drawing.Point(8, 35);
+            this.enqueuedLabel.Location = new System.Drawing.Point(7, 30);
             this.enqueuedLabel.Name = "enqueuedLabel";
-            this.enqueuedLabel.Size = new System.Drawing.Size(318, 18);
+            this.enqueuedLabel.Size = new System.Drawing.Size(265, 16);
             this.enqueuedLabel.TabIndex = 13;
             this.enqueuedLabel.Text = "(0 files enqueued)";
             // 
             // abortButton
             // 
             this.abortButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.abortButton.Location = new System.Drawing.Point(125, 231);
+            this.abortButton.Location = new System.Drawing.Point(104, 262);
             this.abortButton.Name = "abortButton";
-            this.abortButton.Size = new System.Drawing.Size(90, 26);
+            this.abortButton.Size = new System.Drawing.Size(75, 23);
             this.abortButton.TabIndex = 14;
             this.abortButton.Text = "&Abort";
             this.abortButton.Click += new System.EventHandler(this.abortButton_Click);
             // 
+            // unmatchedHashesLabel
+            // 
+            this.unmatchedHashesLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.unmatchedHashesLabel.Location = new System.Drawing.Point(636, 283);
+            this.unmatchedHashesLabel.Name = "unmatchedHashesLabel";
+            this.unmatchedHashesLabel.Size = new System.Drawing.Size(32, 23);
+            this.unmatchedHashesLabel.TabIndex = 16;
+            this.unmatchedHashesLabel.Text = "0";
+            this.unmatchedHashesLabel.TextAlign = System.Drawing.ContentAlignment.TopRight;
+            // 
+            // label5
+            // 
+            this.label5.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.label5.Location = new System.Drawing.Point(356, 283);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(289, 16);
+            this.label5.TabIndex = 15;
+            this.label5.Text = "Number of unmatched md5 hashes: ";
+            // 
             // WinMD5Form
             // 
             this.AllowDrop = true;
-            this.AutoScaleBaseSize = new System.Drawing.Size(6, 15);
+            this.AutoScaleBaseSize = new System.Drawing.Size(5, 13);
             this.BackColor = System.Drawing.Color.PaleGoldenrod;
-            this.ClientSize = new System.Drawing.Size(678, 297);
+            this.ClientSize = new System.Drawing.Size(680, 319);
+            this.Controls.Add(this.unmatchedHashesLabel);
+            this.Controls.Add(this.label5);
             this.Controls.Add(this.abortButton);
             this.Controls.Add(this.enqueuedLabel);
             this.Controls.Add(this.alertLabel);
@@ -758,7 +785,7 @@ namespace WinMD5
             this.Controls.Add(this.progressBar);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Menu = this.mainMenu;
-            this.MinimumSize = new System.Drawing.Size(696, 240);
+            this.MinimumSize = new System.Drawing.Size(580, 208);
             this.Name = "WinMD5Form";
             this.Text = "Title will be set at runtime in WinMD5Form constructor";
             this.Closing += new System.ComponentModel.CancelEventHandler(this.WinMD5Form_Closing);
@@ -800,8 +827,6 @@ namespace WinMD5
 
 				foreach (string file in files)
 				{
-					int lastdelim=file.LastIndexOf("\\");
-	
 					Enqueue(new QueueItem(file,JustTheFileName(file)));
 				}
 			}
@@ -888,7 +913,8 @@ namespace WinMD5
 			listView.Items.Clear();
 		    kb.Clear();
 			knownHashesLabel.Text="0";
-			hashErrors=0;
+            unmatchedHashesLabel.Text = "0";
+            hashErrors = 0;
 			EnableAlert(false);
 		}
 
@@ -1116,7 +1142,6 @@ You may freely distribute this application, but you may not charge for it.";
         {
             useCRLF.Checked ^= true;
         }
-
 
 	}
 }
